@@ -76,6 +76,7 @@ public interface UsersApi {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "[ { \"createdAt\" : \"2023-10-09T10:20:30Z\", \"password\" : \"1e34r\", \"preferences\" : [ 1, 3, 4 ], \"name\" : \"Juan Pérez\", \"userID\" : 1, \"email\" : \"juan.perez@example.com\", \"username\" : \"juanperez\" }, { \"createdAt\" : \"2023-10-09T10:20:30Z\", \"password\" : \"1e34r\", \"preferences\" : [ 1, 3, 4 ], \"name\" : \"Juan Pérez\", \"userID\" : 1, \"email\" : \"juan.perez@example.com\", \"username\" : \"juanperez\" } ]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    String hola=NULL;
                     break;
                 }
             }

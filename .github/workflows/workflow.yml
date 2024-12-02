@@ -134,11 +134,8 @@ jobs:
         with:
           node-version: 16 # Cambia según la versión que uses
 
-      - name: Run SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v1
-        with:
-          args: >
-            -Dsonar.sources=.
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.organization=Jmorunom
-            -Dsonar.projectKey=proyecto24-ga01
+      - name: SonarQube Cloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

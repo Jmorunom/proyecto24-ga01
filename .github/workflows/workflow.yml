@@ -123,21 +123,25 @@ jobs:
         run: echo Todos los microservicios \(Visualization, User, Content\) han sido compilados y probados exitosamente
 
   sonarcloud:
-    name: SonarQube Cloud
+    name: SonarCloud Scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up JDK
-        uses: actions/setup-java@v3
+          node-version: 16 # Cambia según la versión que uses
+
+      - name: Install dependencies
+        run: npm install # O yarn install si usas Yarn
+
+      - name: Run SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v1
         with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Build project
-        run: mvn clean install
-      - name: SonarQube Cloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          args: >
+            -Dsonar.sources=.
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.organization=tu-organizacion
+            -Dsonar.projectKey=tu-proyecto
